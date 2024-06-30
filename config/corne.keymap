@@ -9,6 +9,29 @@
 #include <dt-bindings/zmk/mouse.h>
 
 / {
+    behaviors {
+        capsword_layer: capsword_layer {
+            compatible = "zmk,behavior-caps-word";
+            label = "CAPSWORD_LAYER";
+            #binding-cells = <0>;
+            continue-list = <A B C D E F G H I J K L M N O P Q S R T U V W X Y Z MINUS UNDERSCORE>;
+        };
+
+        alt_printscreen: alt_printscreen {
+            compatible = "zmk,behavior-tap-dance";
+            label = "ALT_PRINTSCREEN";
+            #binding-cells = <0>;
+            bindings = <&kp LEFT_ALT>, <&kp PRINTSCREEN>;
+        };
+
+        ctrl_capslock: ctrl_capslock {
+            compatible = "zmk,behavior-tap-dance";
+            label = "CTRL_CAPSLOCK";
+            #binding-cells = <0>;
+            bindings = <&kp LCTRL>, <&kp CAPSLOCK>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -20,10 +43,10 @@
             //                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
 
             bindings = <
-&kp TAB         &kp Q  &kp W  &kp E         &kp R         &kp T          &kp Y        &kp U          &kp I      &kp O    &kp P          &kp LEFT_BRACKET
-&kp LEFT_SHIFT  &kp A  &kp S  &kp D         &kp F         &kp G          &kp H        &kp J          &kp K      &kp L    &kp SEMICOLON  &kp SQT
-&kp LCTRL       &kp Z  &kp X  &kp C         &kp V         &kp B          &kp N        &kp M          &kp COMMA  &kp DOT  &kp FSLH       &kp NON_US_BACKSLASH
-                              &kp LEFT_ALT  &kp LEFT_WIN  &lt 1 SPACE    &lt 2 ENTER  &kp BACKSPACE  &none
+&kp TAB         &kp Q  &kp W  &kp E             &kp R         &kp T          &kp Y        &kp U          &kp I            &kp O    &kp P          &kp LEFT_BRACKET
+&kp LEFT_SHIFT  &kp A  &kp S  &kp D             &kp F         &kp G          &kp H        &kp J          &kp K            &kp L    &kp SEMICOLON  &kp SQT
+&ctrl_capslock  &kp Z  &kp X  &kp C             &kp V         &kp B          &kp N        &kp M          &kp COMMA        &kp DOT  &kp FSLH       &kp NON_US_BACKSLASH
+                              &alt_printscreen  &kp LEFT_WIN  &lt 1 SPACE    &lt 2 ENTER  &kp BACKSPACE  &capsword_layer
             >;
         };
 
